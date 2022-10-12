@@ -48,7 +48,7 @@ Create the execution context diagram of the following code line by line.
 counter();
 function counter(){
   let count = 0;
-  funciton increment(){
+  function increment(){
     return count++;
   }
   return increment()
@@ -66,4 +66,5 @@ let counter = function () {
   }
   return increment();
 };
+// this will throw an error
 ```
