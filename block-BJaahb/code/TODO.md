@@ -50,4 +50,5 @@ blue();
 tomato();
 
 // What will be the background color after the execution of last line
+// Background color after the execution of last line is tomato 
 ```
