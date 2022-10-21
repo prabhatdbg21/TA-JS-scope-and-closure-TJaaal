@@ -16,11 +16,20 @@ function outer (str){
 
 ```js
 function delay (cb , time){
-  function cb () {
-    alert ("hi")
+  return function (){
+    setTimeout (cb , time)
   }
-  return setTimeout(cb() , time)
 }
+/*
+function hello (){
+  console.log('hello')
+}
+
+let tm = delay( hello ,4000)
+
+tm()
+*/
+
 ```
 
 3. Write a function with a closure. The first function should only take one argument, someone's last name, and return the inner function. The returned `inner` function should take one more argument, someone's first name. When inner function when called it should console.log both the first name and the last name with a space.
@@ -77,14 +86,12 @@ When `forEach` function is called it returns another function. When the returned
 ```js
 function forEach(arr) {
   let index = 0
-  return function next (){
-    return arr[index]
-    index++
+  return function (){
+    return arr[index++]
   }
 }
 
-let next = [1, 2, 3, 4, 5];
-let final = forEach([1, 2, 3, 4, 5])
+let next = forEach([1, 2, 3, 4, 5]);
 
 next(); // 1
 next(); // 2
@@ -153,11 +160,11 @@ function nameFactory (firstName , lastName){
       return `${firstName} ${lastName}`
     },
     setFirstName: function (first){
-      firstName = `${first}`
+      firstName = first
       return `${firstName} ${lastName}`
     },
     setLastName: function (last){
-      lastName = `${last}`
+      lastName = last
       return `${firstName} ${lastName}`
     }
   }
@@ -174,8 +181,12 @@ arya.setLastName('Lannister'); // "Jon Lannister"
 The returned function accepts a string (children) and returns the children with the tag you passed.
 
 ```js
-function createTag (htmlElement) {
-  
+function createTag (tag) {
+  return function (children) {
+    let elm = document.createElement(tag);
+    elm.innerText = children;
+    return elm;
+  }
 }
 
 let bold = createTag('b');
