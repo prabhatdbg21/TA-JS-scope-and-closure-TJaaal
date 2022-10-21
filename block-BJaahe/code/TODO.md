@@ -5,22 +5,21 @@
 ```js
 function outer (str){
   function sayHello () {
-    alert (str)
+    alert (`${str}`)
   }
   sayHello ()
 }
+
 ```
 
 2. Write a function `delay` that accepts two arguments, a callback and the wait for the time in milliseconds (1000 ms is 1 second). `delay` should return a function that, when invoked waits for the specified amount of time before executing. (Use setTimeout)
 
 ```js
 function delay (cb , time){
-  setTimeout(function cb () {
+  function cb () {
     alert ("hi")
-  }, time)
-  return function (){
-    cb(time)
   }
+  return setTimeout(cb() , time)
 }
 ```
 
@@ -28,10 +27,9 @@ function delay (cb , time){
 
 ```js
 function lastName(last) {
-  function firstName (first){
+  return function (first){
     console.log (`${first} ${last}`)
   }
-  firstName ()
 }
 
 let lastNameLee = lastName('lee'); // logs nothing
@@ -49,8 +47,14 @@ lastNameLee('Lynne'); //logs 'Lynne Lee'
 
 ```js
 function storyWriter() {
+  let story = ""
   return {
-    
+    addWords: function (str){
+      return story += ` ${str}`
+    },
+    erase: function (){
+      return story = ""
+    }
   }
 }
 
@@ -71,11 +75,17 @@ storyOfMyLife.erase(); // ''
 When `forEach` function is called it returns another function. When the returned function is called it returns the element from the array at specific index. Every time you call the returned function the value of index should increment.
 
 ```js
-function forEach() {
-  // Your code goes here
+function forEach(arr) {
+  let index = 0
+  return function next (){
+    return arr[index]
+    index++
+  }
 }
 
 let next = [1, 2, 3, 4, 5];
+let final = forEach([1, 2, 3, 4, 5])
+
 next(); // 1
 next(); // 2
 next(); // 3
@@ -89,7 +99,9 @@ The returned function accepts a string `prefix` and returns `prefix` and `title`
 
 ```js
 function addDesignation(title) {
-  // your code goes here
+  return function (prefix){
+    return `${prefix}  ${title}`
+  }
 }
 
 let sales = addDesignation('Salesman');
@@ -107,8 +119,18 @@ manager('Head'); // Head Manager
 - `current` will return the current salary returns the updated salary
 
 ```js
-function changeSalary() {
-  // Your code goes here
+function changeSalary(num) {
+  return {
+    raise: function (){
+      return num += 500
+    },
+    lower: function (){
+      return num += -500
+    },
+    current: function (){
+      return num
+    }
+  }
 }
 
 let sam = changeSalary(2000);
@@ -125,7 +147,21 @@ arya.lower(); // 3500
 - `setLastName`: accepts a parameter last name using which updates the firstName and return the updated full name
 
 ```js
-// Your code goes here
+function nameFactory (firstName , lastName){
+  return{
+    getFullName: function (){
+      return `${firstName} ${lastName}`
+    },
+    setFirstName: function (first){
+      firstName = `${first}`
+      return `${firstName} ${lastName}`
+    },
+    setLastName: function (last){
+      lastName = `${last}`
+      return `${firstName} ${lastName}`
+    }
+  }
+}
 
 let arya = nameFactory('Arya', 'Stark');
 arya.getFullName(); // "Arya Stark"
@@ -138,8 +174,8 @@ arya.setLastName('Lannister'); // "Jon Lannister"
 The returned function accepts a string (children) and returns the children with the tag you passed.
 
 ```js
-function createTag() {
-  // your code goes here
+function createTag (htmlElement) {
+  
 }
 
 let bold = createTag('b');
