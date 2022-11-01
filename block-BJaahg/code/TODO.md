@@ -33,7 +33,7 @@ console.log(window.fullName(firstName, lastName)); // 'AryaStark'
 3. Make a Execution Context Diagram for the following JS and write the output.
 
 ```js
-fucntion addOne(num){
+function addOne(num){
   return num + 1;
 }
 var one = addOne(0);
@@ -45,7 +45,7 @@ console.log(one, two);
 
 ```js
 var one = addOne(0);
-fucntion addOne(num){
+function addOne(num){
   return num + 1;
 }
 var two = addOne(1);
@@ -71,7 +71,7 @@ const addOne = (num) => {
   return num + 1;
 };
 var two = addOne(1);
-console.log(two);
+console.log(two);  // Error    addOne is not defined
 ```
 
 7. Make a Execution Context Diagram for the following JS and write the output.
@@ -82,7 +82,7 @@ const addOne = (num) => {
   return num + 1;
 };
 var two = addOne(1);
-console.log(two);
+console.log(two);   // Error    addOne is not defined
 ```
 
 8. What will be the output of the following
@@ -164,7 +164,7 @@ console.log(name); // Arya Stark    (var is globel scope)
 if (true) {
   let name = 'Arya Stark';
 }
-console.log(name);// 
+console.log(name);// name is not defined
 ```
 
 15. Guess the output of the code below with a reason.
