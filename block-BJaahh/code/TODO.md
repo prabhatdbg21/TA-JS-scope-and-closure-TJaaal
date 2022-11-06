@@ -31,6 +31,7 @@ const final = name('Smith'); // final should be "Will Smith"
 3. Write a function called `isInBetween` which takes two parameter `a` and `b` and returns a function. When you call the returned function with any number it returns `true` if the value is in between `a` and `b`.
 
 ```js
+/*
 function isInBetween(a, b) {
   function isChild(num) {
     if (num > a && num < b){
@@ -41,6 +42,17 @@ function isInBetween(a, b) {
     }
   }
   return isChild ;
+}
+*/
+function isInBetween(a, b) {
+  return function (c){
+    if (a > b) {
+      return c > b && c < a ;
+    }
+    else {
+      return c < b && c > a ;
+    }
+  }
 }
 
 const isChild = isInBetween(10, 100);
@@ -70,7 +82,7 @@ callWithHello('How Are You?'); // Hello How Are You?
 ```js
 function addGame(gameName , score) {
   function newScore (){
-    return ` Your score of ${gameName} is ${score + 1}`
+    return ` Your score of ${gameName} is ${++score}`
   }
   return newScore ;
 }
@@ -78,15 +90,16 @@ function addGame(gameName , score) {
 // Output
 const hockey = addGame('Hockey', 0);
 hockey(); // Your score of Hockey is 1
-hockey(); // Your score of Hockey is 1
+hockey(); // Your score of Hockey is 2
 const cricket = addGame('Cricket', 1);
 cricket(); // Your score of Cricket is 2
-cricket(); // Your score of Cricket is 2
+cricket(); // Your score of Cricket is 3
 ```
 
 6. Write a function called `getCard` which takes one of these options (club, spade, heart, diamond) returns a function calling that function returns random card (2,3,4,5,6,7,8,9,10,J, Q, K, A) of that suit.
 
 ```js
+/*
 function getCard(suit) {
   function randomCard () {
     let card = ["A" , "2" , "3" , "4" , "5" , "6" , "7" , "8" , "9" , "10" , "J" , "Q" , "K"] ;
@@ -94,6 +107,16 @@ function getCard(suit) {
     return `Card is: ${card[`${random}`]} ${suit}`
   }
   return randomCard ;
+}
+*/
+function getCard(suit) {
+  return function() {
+    let values = [2,3,4,5,6,7,8,9,10,"J","Q","K","A"] ;
+    function getRandomNumber (){
+      return Math.floor(Math.random() * values.length); 
+    }
+    return `Card is: ${values[getRandomNumber()]} ${suit}`
+  }
 }
 
 // Output
