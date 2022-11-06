@@ -3,7 +3,12 @@
 1. Write a function called `multiplyBy` that takes a `number` as an argument and returns a function. Returned function takes another `number` as an argument and returns the multiplication of both the numbers.
 
 ```js
-// Your code goes here
+function multiplyBy(num){
+  function double(num2){
+    return num * num2
+  }
+  return double
+}
 
 const double = multiplyBy(2);
 const final = double(15); // final should be 30
@@ -12,7 +17,12 @@ const final = double(15); // final should be 30
 2. Write a function called `fullName` that takes a string `firstName` as an argument and returns a function. Returned function takes another string `lastName` as an argument and returns full name.
 
 ```js
-// Your code goes here
+function fullName (firstName){
+  function name (lastName){
+    return `${firstName} ${lastName}`
+  }
+  return name ;
+}
 
 const name = fullName('Will');
 const final = name('Smith'); // final should be "Will Smith"
@@ -22,7 +32,15 @@ const final = name('Smith'); // final should be "Will Smith"
 
 ```js
 function isInBetween(a, b) {
-  // your code goes here
+  function isChild(num) {
+    if (num > a && num < b){
+      return true
+    }
+    else {
+      return false
+    }
+  }
+  return isChild ;
 }
 
 const isChild = isInBetween(10, 100);
@@ -35,7 +53,10 @@ isChild(103); // false
 
 ```js
 function letsWishThem(greeting) {
-  // your code goes here
+  function callWith (message) {
+    return `${greeting} ${message}`
+  }
+  return callWith ;
 }
 
 const callWithHey = letsWishThem('Hey');
@@ -47,14 +68,17 @@ callWithHello('How Are You?'); // Hello How Are You?
 5. Write a function called `addGame` which takes a string (name of the game) and the current score. It returns a function calling that will increment the score by one and print something like `Score of Basketball is 1`.
 
 ```js
-function addGame(gameName) {
-  // your code goes here
+function addGame(gameName , score) {
+  function newScore (){
+    return ` Your score of ${gameName} is ${score + 1}`
+  }
+  return newScore ;
 }
 
 // Output
 const hockey = addGame('Hockey', 0);
 hockey(); // Your score of Hockey is 1
-hockey(); // Your score of Hockey is 2
+hockey(); // Your score of Hockey is 1
 const cricket = addGame('Cricket', 1);
 cricket(); // Your score of Cricket is 2
 cricket(); // Your score of Cricket is 2
@@ -64,7 +88,12 @@ cricket(); // Your score of Cricket is 2
 
 ```js
 function getCard(suit) {
-  // your code goes here
+  function randomCard () {
+    let card = ["A" , "2" , "3" , "4" , "5" , "6" , "7" , "8" , "9" , "10" , "J" , "Q" , "K"] ;
+    let random = Math.floor(Math.random() * 12); 
+    return `Card is: ${card[`${random}`]} ${suit}`
+  }
+  return randomCard ;
 }
 
 // Output
