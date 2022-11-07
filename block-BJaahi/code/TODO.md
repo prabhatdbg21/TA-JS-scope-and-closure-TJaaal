@@ -209,10 +209,15 @@ sayHi();
 ```js
 // Declaration Phase
 function sayHi(name) {
+  // Declaration Phase
+  var name = undefined ;
+  let age ;
+
+  // Execution Phase
   console.log(name);
   console.log(age);
-  var name = 'Lydia';
-  let age = 21;
+  name = 'Lydia';
+  age = 21;
 }
 
 // Execution Phase
@@ -236,10 +241,15 @@ function sayHi(name) {
 ```js
 // Declaration Phase
 function sayHi(name) {
+  // Declaration Phase
+  var name = undefined ;
+  let age ;
+
+  // Execution Phase
   console.log(name);
   console.log(age);
-  var name = 'Lydia';
-  let age = 21;
+  name = 'Lydia';
+  age = 21;
 }
 
 // Execution Phase
@@ -265,13 +275,7 @@ let sayHi = function sayHi(name) {
 let sayHi ;
 
 // Execution Phase
-sayHi();
-sayHi = function sayHi(name) {
-  console.log(name);
-  console.log(age);
-  var name = 'Lydia';
-  let age = 21;
-};
+sayHi();    // throw an error
 ```
 
 9.
