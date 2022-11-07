@@ -20,7 +20,16 @@ console.log(
 2. Construct a function `multiMap` that will accept two arrays: an array of values and an array of callbacks. `multiMap` will return an object whose keys match the elements in the array of values. The corresponding values that are assigned to the keys will be arrays consisting of outputs from the array of callbacks, where the input to each callback is the key.
 
 ```js
-function multiMap(arrVals, arrCallbacks) {}
+function multiMap(arrVals, arrCallbacks) {
+  let result = {}
+  
+  for (i = 0 ; i = arrVals.length ; i++){
+    let value = []
+    for (x = 0 ; x = arrCallbacks.length ; x++) {
+      return arrCallbacks[x](arrVals[i])
+    }
+  }
+}
 
 // TEST
 console.log(
@@ -123,7 +132,9 @@ Create a function named `schedule` which accept two arguments an array of functi
 The function `schedule` will execute the function at first index after the value in value on first index in second array. i.e execute `sayHi` after `1` second and `sayHello` after `2` second.
 
 ```js
-function schedule() {}
+function schedule() {
+  
+}
 
 function sayHi() {
   console.log('Hi');
