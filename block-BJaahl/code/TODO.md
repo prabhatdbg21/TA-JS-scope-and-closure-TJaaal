@@ -2,7 +2,7 @@
 
 ```js
 function once(cb) {
-  var executed = false
+  let executed = false
   return function (){
     if (!executed){
       executed = true ;
@@ -24,7 +24,7 @@ log(); // return undefinde (can't be called twice)
 
 ```js
 function once(cb , pram ) {
-  var executed = false
+  let executed = false
   return function (){
     if (!executed){
       executed = true ;
@@ -47,13 +47,11 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/rest
 
 ```js
 function once(cb,  ...pram) {
-  var executed = false
+  let executed = false
   return function (){
     if (!executed){
       executed = true ;
-      for (i =0 ; i < pram.length ; i++){
-        cb(pram[i])
-      }
+      cb(...pram)
     }
   }
 }
@@ -68,13 +66,14 @@ log(); // return undefinde (can't be called twice)
 
 ```js
 function nTimes(cb, times, ...rest) {
-  var executed = false
-  return function (){
-    if (!executed){
-      executed = true ;
-      for (i =0 ; i < times ; i++){
-        cb(rest)
-      }
+  let numberOfTimesCalled = 0 ;
+  return function() {
+    if (numberOfTimesCalled >= times){
+      alert (`can not call this function more then ${times} times`)
+    }
+    else{
+      cb(...rest) ;
+      numberOfTimesCalled += 1 ;
     }
   }
 }
