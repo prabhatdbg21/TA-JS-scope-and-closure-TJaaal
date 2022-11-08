@@ -29,6 +29,7 @@ The returned function either accepts two parameter or one parameter.
 - When you pass one parameter it should return a string with words replaced with the required words.
 
 ```js
+/*
 function multipleCensor() {
   toBeReplace = []
   replaceby = []
@@ -42,6 +43,25 @@ function multipleCensor() {
         str1.replace (toBeReplace[i] , replaceby[i])
       }
       return str1
+    }
+  }
+}
+*/ .  // this code is not working (writen by me)
+function multipleCensor() {
+  let words = [] ;
+  return function (...params) {
+    if (params.length === 1){
+      let quote = params[0] ;
+      words.forEach( pair => {
+        quote = quote.replace(pair[0], pair[1])
+      });
+      return quote
+    }
+    else if (params.length === 2){
+      words.push(params);
+    }
+    else {
+      alert ('The number of parameters are invalid')
     }
   }
 }
@@ -67,17 +87,15 @@ The returned function accepts one parameter.
 - If the parameter is the same as the password it will return the object in which we stored the values.
 
 ```js
-function createCache(cb , str) {
-  return function (password) {
-    let value = {}
-    if(password !== str){
-      value[password] = cb(password) ;
-      return cb(password)
+function createCache(cb , pwd) {
+  let obj = {}
+  return function (param) {
+    if(param !== pwd){
+      obj[param] = cb(param) ;
+      return cb(param)
     }
-    return value ;
     else {
-      console.log (value)
-      return value ;
+      return obj ;
     }
   }
 }
@@ -98,21 +116,24 @@ addCache('foo'); // {12: 22, 100: 110, 1: 11}
 4. Change the above function in such a way that when the returned function is called with any other value than password. It should first check the object where we are storing the argument and return value. If the key is present return the value form the object itself. Otherwise call the callback function with the parameter.
 
 ```js
-function createCache(cb , str) {
-  return function (password) {
-    let value = {}
-    if(password !== str){
-      
-      value[password] = cb(password) ;
-      return cb(password)
+function createCache(cb , pwd) {
+  let obj = {}
+  return function (param) {
+    if(param !== pwd){
+      if(obj[param]){
+        return obj[param];
+      }
+      else{
+        obj[param] = cb(param) ;
+        return cb(param)
+      }
     }
-    return value ;
     else {
-      console.log (value)
-      return value ;
+      return obj ;
     }
   }
 }
+
 
 function add10(num) {
   return num + 10;
